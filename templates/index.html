@@ -1,0 +1,14 @@
+{% include 'partials/_admin_header.html' with title=title %}
+
+{% include 'partials/_admin_navbar.html' %}
+
+
+{% include 'partials/_admin_sidebar.html' %}
+<div class="content-page">
+    <div class="content">
+        {% block main_content %}
+        {% endblock main_content %}
+    </div>
+</div>
+{% include 'partials/_admin_rightsidebar.html' %}
+{% include 'partials/_admin_footer.html' %}
