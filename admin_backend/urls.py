@@ -1,8 +1,8 @@
-from django.urls import path
+from django.urls import path, include
 from . import views
 from . import category_views
 
 urlpatterns = [
     path('', views.admin_home, name="admin_home"),
-    path('category/', category_views.category, name="category")
+    path('category/', include('admin_backend.category_api')),
 ]
