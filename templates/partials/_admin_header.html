@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load staticfiles %}
 <html>
 <head>
     <meta charset="utf-8">
@@ -8,7 +9,12 @@
     <link rel="shortcut icon" href="images/favicon_1.ico">
     <title>{{ title }}</title>
     {% include 'partials/_admin_css.html' %}
+    <script src="{% static 'js/vue/vue.js' %}"></script>
+    <script type="text/javascript">
+        var csrf = '{{ csrf_token }}';
+        var baseUrl="api/v1/";
+    </script>
+    <script src="{% static 'js/vue/errors.js' %}"></script>
 
 </head>
 <body class="fixed-left">
-<div id="app">

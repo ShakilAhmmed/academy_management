@@ -1,33 +1,58 @@
 {% extends 'index.html' %}
+{% load staticfiles %}
 {% block main_content %}
-    <button class="btn btn-primary waves-effect waves-light pull-right" data-toggle="modal"
-            data-target="#con-close-modal">
-        Add New Category
-    </button>
-    <div id="con-close-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-         aria-hidden="true" style="display: none;">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    <h4 class="modal-title">Add New Category</h4>
-                </div>
-                <div class="modal-body">
-
-                    <form role="form">
-                        <div class="form-group">
-                            <label for="">Category Code</label>
-                            <input type="text" class="form-control" id="">
+    <div id="category">
+        <button class="btn btn-primary waves-effect waves-light pull-right" data-toggle="modal"
+                data-target="#con-close-modal">
+            Add New Category
+        </button>
+        <form role="form"  @submit.prevent="AddNewCategory">
+            <div id="con-close-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                 aria-hidden="true" style="display: none;">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h4 class="modal-title">Add New Category</h4>
                         </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-info waves-effect waves-light">Save changes</button>
+                        <div class="modal-body">
+
+
+                            <div class="form-group">
+                                <label for="">Category Code</label>
+                                <input type="text" class="form-control" v-model="CategoryForm.category_code">
+                                 <small id="emailHelp" class="form-text text-danger" v-text="errors.get('category_code')"></small>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Category Title</label>
+                                <input type="text" class="form-control" id="" v-model="CategoryForm.category_title" @keyup="ConvertSlug($event)">
+                                <small id="emailHelp" class="form-text text-danger" v-text="errors.get('category_title')"></small>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Category Slug</label>
+                                <input type="text" readonly class="form-control" id=""
+                                       v-model="CategoryForm.category_slug">
+                                <small id="emailHelp" class="form-text text-danger" v-text="errors.get('category_slug')"></small>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Category Status</label>
+                                <select class="form-control" v-model="CategoryForm.category_status">
+                                    <option value>--Select--</option>
+                                    <option value="1">Active</option>
+                                    <option value="2">Inactive</option>
+                                </select>
+                               <small id="emailHelp" class="form-text text-danger" v-text="errors.get('category_status')"></small>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Close
+                            </button>
+                            <button type="submit" class="btn btn-info waves-effect waves-light">Save</button>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
-
-
+    <script src="{% static 'js/resources/category.js' %}"></script>
 {% endblock main_content %}
