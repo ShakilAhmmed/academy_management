@@ -9,6 +9,7 @@ new Vue({
             csrfmiddlewaretoken: csrf,
         },
         errors: new Errors(),
+        AllData: [],
     },
     methods: {
         AddNewCategory: function () {
@@ -19,6 +20,7 @@ new Vue({
                 data: _this.CategoryForm,
                 success: function (data) {
                     if (data.status === 201) {
+                        _this.AllData.push(data.data);
                         toastr.success('Success!', 'New Category Created Successfully');
                         _this.ClearData();
                         $(".close").click();
@@ -36,7 +38,7 @@ new Vue({
             const _this = this;
             _this.errors.record([]);
             $.each(_this.CategoryForm, function (key, value) {
-                _this.CategoryForm[key]='';
+                _this.CategoryForm[key] = '';
             });
         },
         ConvertSlug: function (event) {
@@ -44,9 +46,23 @@ new Vue({
             text = text.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '');
             this.CategoryForm.category_slug = text;
         },
+        GetCategoryData: function () {
+            const _this = this;
+            $.ajax({
+                url: 'add_category',
+                type: "GET",
+                success: function (data) {
+                    _this.AllData = data;
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log(textStatus, errorThrown);
+                }
+            });
+        }
     },
 
     mounted() {
+        this.GetCategoryData();
         console.log("Ok")
     }
 });

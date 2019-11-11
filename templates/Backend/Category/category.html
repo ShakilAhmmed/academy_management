@@ -6,7 +6,7 @@
                 data-target="#con-close-modal">
             Add New Category
         </button>
-        <form role="form"  @submit.prevent="AddNewCategory">
+        <form role="form" @submit.prevent="AddNewCategory">
             <div id="con-close-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
                  aria-hidden="true" style="display: none;">
                 <div class="modal-dialog">
@@ -21,18 +21,22 @@
                             <div class="form-group">
                                 <label for="">Category Code</label>
                                 <input type="text" class="form-control" v-model="CategoryForm.category_code">
-                                 <small id="emailHelp" class="form-text text-danger" v-text="errors.get('category_code')"></small>
+                                <small id="emailHelp" class="form-text text-danger"
+                                       v-text="errors.get('category_code')"></small>
                             </div>
                             <div class="form-group">
                                 <label for="">Category Title</label>
-                                <input type="text" class="form-control" id="" v-model="CategoryForm.category_title" @keyup="ConvertSlug($event)">
-                                <small id="emailHelp" class="form-text text-danger" v-text="errors.get('category_title')"></small>
+                                <input type="text" class="form-control" id="" v-model="CategoryForm.category_title"
+                                       @keyup="ConvertSlug($event)">
+                                <small id="emailHelp" class="form-text text-danger"
+                                       v-text="errors.get('category_title')"></small>
                             </div>
                             <div class="form-group">
                                 <label for="">Category Slug</label>
                                 <input type="text" readonly class="form-control" id=""
                                        v-model="CategoryForm.category_slug">
-                                <small id="emailHelp" class="form-text text-danger" v-text="errors.get('category_slug')"></small>
+                                <small id="emailHelp" class="form-text text-danger"
+                                       v-text="errors.get('category_slug')"></small>
                             </div>
                             <div class="form-group">
                                 <label for="">Category Status</label>
@@ -41,7 +45,8 @@
                                     <option value="1">Active</option>
                                     <option value="2">Inactive</option>
                                 </select>
-                               <small id="emailHelp" class="form-text text-danger" v-text="errors.get('category_status')"></small>
+                                <small id="emailHelp" class="form-text text-danger"
+                                       v-text="errors.get('category_status')"></small>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -53,6 +58,52 @@
                 </div>
             </div>
         </form>
+
+        <div class="row">
+            <div class="col-md-12 m-t-5">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Category Data</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Sl No</th>
+                                            <th>Category Code</th>
+                                            <th>Category Title</th>
+                                            <th>Category Slug</th>
+                                            <th>Category Status</th>
+                                            <th>Action</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr v-for="(category_data,index) in AllData">
+                                            <td><input type="checkbox"></td>
+                                            <td v-text="index+1"></td>
+                                            <td v-text="category_data.category_code"></td>
+                                            <td v-text="category_data.category_title"></td>
+                                            <td v-text="category_data.category_slug"></td>
+                                            <td>
+                                                <i  v-if="category_data.category_status==1" class="fa fa-check-circle text-success"></i>
+                                                <i  v-else class="fa fa-crosshairs text-danger"></i>
+                                            </td>
+                                            <td>Cityname</td>
+                                        </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <script src="{% static 'js/resources/category.js' %}"></script>
 {% endblock main_content %}

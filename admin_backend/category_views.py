@@ -4,6 +4,7 @@ from admin_backend.forms.category_form import CategoryForm
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from admin_backend.serializers.category_serializer import CategorySerializer
+from .models import Category
 
 
 def category(request):
@@ -17,7 +18,9 @@ def category(request):
 
 class CategoryApi(APIView):
     def get(self, request, format=None):
-        return Response("Ok")
+        categories = Category.objects.all()
+        serializer = CategorySerializer(categories, many=True)
+        return Response(serializer.data)
 
     def post(self, request):
         serializer = CategorySerializer(data=request.POST)
