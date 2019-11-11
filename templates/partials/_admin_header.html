@@ -9,10 +9,11 @@
     <link rel="shortcut icon" href="images/favicon_1.ico">
     <title>{{ title }}</title>
     {% include 'partials/_admin_css.html' %}
+    <script src="{% static 'admin_backend/js/jquery.min.js' %}"></script>
     <script src="{% static 'js/vue/vue.js' %}"></script>
     <script type="text/javascript">
         var csrf = '{{ csrf_token }}';
-        var baseUrl="api/v1/";
+        var baseUrl = "api/v1/";
     </script>
     <script src="{% static 'js/vue/errors.js' %}"></script>
 
