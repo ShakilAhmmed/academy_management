@@ -52,12 +52,47 @@ new Vue({
                 url: 'add_category',
                 type: "GET",
                 success: function (data) {
+                    console.log(data);
                     _this.AllData = data;
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     console.log(textStatus, errorThrown);
                 }
             });
+        },
+        DeleteCategory: function (index, id) {
+            const _this = this;
+            const URL = 'category_detail/' + id;
+            swal({
+                title: "Are you sure?",
+                text: "Are you Sure Delete This",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        $.ajax({
+                            url: URL,
+                            type: "DELETE",
+                            success: function (response) {
+                                if(response.status===204)
+                                {
+                                     _this.AllData.splice(index, 1);
+                                     toastr.warning('Success!', 'Category Deleted Successfully!');
+                                }
+                                else
+                                {
+                                    toastr.info('Opps!', 'Please Try Again Later');
+                                }
+                            },
+                            error: function (jqXHR, textStatus, errorThrown) {
+                                toastr.info('Opps!', 'Application Error');
+                                console.log(textStatus, errorThrown);
+                            }
+                        });
+                    }
+                });
         }
     },
 
