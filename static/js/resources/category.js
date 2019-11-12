@@ -76,13 +76,10 @@ new Vue({
                             url: URL,
                             type: "DELETE",
                             success: function (response) {
-                                if(response.status===204)
-                                {
-                                     _this.AllData.splice(index, 1);
-                                     toastr.warning('Success!', 'Category Deleted Successfully!');
-                                }
-                                else
-                                {
+                                if (response.status === 204) {
+                                    _this.AllData.splice(index, 1);
+                                    toastr.warning('Success!', 'Category Deleted Successfully!');
+                                } else {
                                     toastr.info('Opps!', 'Please Try Again Later');
                                 }
                             },
@@ -93,6 +90,25 @@ new Vue({
                         });
                     }
                 });
+        },
+        StatusChange: function (id) {
+            const _this = this;
+            $.ajax({
+                url: 'category_status/' + id,
+                type: "GET",
+                success: function (data) {
+                    if (data.status === 203) {
+                        toastr.success('Success!', 'Status Changed Into Active');
+                    } else {
+                        toastr.warning('Success!', 'Status Changed Into Inactive');
+                    }
+                    _this.GetCategoryData();
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log(textStatus, errorThrown);
+                }
+            });
+
         }
     },
 

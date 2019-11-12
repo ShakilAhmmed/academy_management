@@ -1,5 +1,5 @@
 from django.http import HttpResponse, Http404
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from admin_backend.forms.category_form import CategoryForm
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -64,5 +64,18 @@ class CategoryDetail(APIView):
 
     def delete(self, request, pk, format=None):
         category = self.get_object(pk)
-        deleted=category.delete()
+        deleted = category.delete()
         return Response({'status': 204}) if deleted else Response({'status': 404})
+
+
+class CategoryStatus(APIView):
+    def get(self, request, pk):
+        category_data = get_object_or_404(Category, pk=pk)
+        if category_data.category_status:
+            category_data.category_status = 0
+            response = {'status': 202}
+        else:
+            category_data.category_status = 1
+            response = {'status': 203}
+        category_data.save()
+        return Response(response)

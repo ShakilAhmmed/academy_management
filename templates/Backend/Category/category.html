@@ -50,7 +50,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Close
+                            <button type="button" @click="ClearData" class="btn btn-default waves-effect" data-dismiss="modal">Close
                             </button>
                             <button type="submit" class="btn btn-info waves-effect waves-light">Save</button>
                         </div>
@@ -89,11 +89,22 @@
                                             <td v-text="category_data.category_title"></td>
                                             <td v-text="category_data.category_slug"></td>
                                             <td>
-                                                <i  v-if="category_data.category_status==1" class="fa fa-check-circle text-success"></i>
-                                                <i  v-else class="fa fa-crosshairs text-danger"></i>
+                                                <i v-if="category_data.category_status==1"
+                                                   class="fa fa-check-circle text-success"></i>
+                                                <i v-else class="fa fa-times text-danger"></i>
                                             </td>
                                             <td>
-                                                <button class="btn btn-danger" @click="DeleteCategory(index,category_data.id)"><i class="fa fa-trash-o"></i> </button>
+                                                <button class="btn" @click="StatusChange(category_data.id)">
+                                                    <i v-if="category_data.category_status==1"
+                                                       class="fa fa-times text-danger"></i>
+                                                    <i v-else class="fa fa-check-circle text-success"></i>
+                                                </button>
+                                                <button class="btn btn-danger"
+                                                        @click="DeleteCategory(index,category_data.id)">
+                                                    <i class="fa fa-trash-o"></i>
+                                                </button>
+
+
                                             </td>
                                         </tr>
 
