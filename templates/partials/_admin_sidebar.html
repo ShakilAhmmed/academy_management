@@ -1,8 +1,9 @@
+{% load staticfiles %}
 <div class="left side-menu">
     <div class="sidebar-inner slimscrollleft">
         <div class="user-details">
             <div class="pull-left">
-                <img src="images/users/avatar-1.jpg" alt="" class="thumb-md img-circle">
+                <img src="{% static 'admin_backend/images/users/avatar-1.jpg' %}" alt="" class="thumb-md img-circle">
             </div>
             <div class="user-info">
                 <div class="dropdown">
@@ -32,6 +33,7 @@
                 <li>
 
                     <a href="{% url 'category' %}" class="waves-effect"><i class="md md-event"></i><span> Category </span></a>
+                    <a href="{% url 'sub_category' %}" class="waves-effect"><i class="md md-event"></i><span> Sub Category </span></a>
                 </li>
 
                 <li class="has_sub">
