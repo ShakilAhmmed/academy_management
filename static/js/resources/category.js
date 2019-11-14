@@ -8,6 +8,13 @@ new Vue({
             category_status: '',
             csrfmiddlewaretoken: csrf,
         },
+        EditCategoryForm: {
+            category_code: '',
+            category_title: '',
+            category_slug: '',
+            category_status: '',
+            csrfmiddlewaretoken: csrf,
+        },
         errors: new Errors(),
         AllData: [],
     },
@@ -40,11 +47,13 @@ new Vue({
             $.each(_this.CategoryForm, function (key, value) {
                 _this.CategoryForm[key] = '';
             });
+            this.GetCategoryData();
         },
         ConvertSlug: function (event) {
             var text = event.target.value;
             text = text.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '');
             this.CategoryForm.category_slug = text;
+            this.EditCategoryForm.category_slug = text;
         },
         GetCategoryData: function () {
             const _this = this;
@@ -109,6 +118,32 @@ new Vue({
                 }
             });
 
+        },
+        EditCategory: function (index, data) {
+            const _this = this;
+            _this.EditCategoryForm = data;
+
+        },
+        UpdateCategory:function () {
+            const _this = this;
+            $.ajax({
+                url: 'category_detail/'+_this.EditCategoryForm['id'],
+                type: "PUT",
+                data: _this.EditCategoryForm,
+                success: function (data) {
+                    console.log(data);
+                    if (data.status === 201) {
+                        toastr.success('Success!', 'Category Updated Successfully');
+                        _this.ClearData();
+                        $(".close").click();
+                    } else {
+                        _this.errors.record(data.errors);
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log(textStatus, errorThrown);
+                }
+            });
         }
     },
 

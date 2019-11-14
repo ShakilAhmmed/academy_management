@@ -59,8 +59,17 @@ class CategoryDetail(APIView):
         serializer = CategorySerializer(category, data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors)
+            context = {
+                'status': 201,
+                'data': serializer.data
+            }
+            return Response(context)
+        else:
+            context = {
+                'status': 400,
+                'errors': serializer.errors,
+            }
+        return Response(context)
 
     def delete(self, request, pk, format=None):
         category = self.get_object(pk)
