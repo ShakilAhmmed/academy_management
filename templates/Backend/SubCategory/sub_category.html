@@ -1,0 +1,122 @@
+{% extends 'index.html' %}
+{% load staticfiles %}
+{% block main_content %}
+    <div id="sub_category">
+        <button class="btn btn-primary waves-effect waves-light pull-right" data-toggle="modal"
+                data-target="#con-close-modal">
+            Add New Sub Category
+        </button>
+        <form role="form" action="" method="post">
+            {% csrf_token %}
+            <div id="con-close-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                 aria-hidden="true" style="display: none;">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h4 class="modal-title">Add New Sub Category</h4>
+                        </div>
+                        <div class="modal-body">
+
+
+                            <div class="form-group">
+                                <label for="{{ form.category.id_for_label }}">{{ form.category.label|title }}</label>
+                                {{ form.category }}
+                                <small id="emailHelp"
+                                       class="form-text text-danger">{{ form.category.errors|title }}</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="{{ form.sub_category_code.id_for_label }}">{{ form.sub_category_code.label|title }}</label>
+                                {{ form.sub_category_code }}
+                                <small id="emailHelp"
+                                       class="form-text text-danger">{{ form.sub_category_code.errors|title }}</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="{{ form.sub_category_title.id_for_label }}">{{ form.sub_category_title.label|title }}</label>
+                                {{ form.sub_category_title }}
+                                <small id="emailHelp"
+                                       class="form-text text-danger">{{ form.sub_category_title.errors|title }}</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="{{ form.sub_category_slug.id_for_label }}">{{ form.sub_category_slug.label|title }}</label>
+                                {{ form.sub_category_slug }}
+                                <small id="emailHelp"
+                                       class="form-text text-danger">{{ form.sub_category_slug.errors|title }}</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="{{ form.sub_category_status.id_for_label }}">{{ form.sub_category_status.label|title }}</label>
+                                {{ form.sub_category_status }}
+                                <small id="emailHelp"
+                                       class="form-text text-danger">{{ form.sub_category_status.errors|title }}</small>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default waves-effect"
+                                    data-dismiss="modal">Close
+                            </button>
+                            <button type="submit" class="btn btn-info waves-effect waves-light">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <div class="row">
+            <div class="col-md-12 m-t-5">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Sub Category Data</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Sl No</th>
+                                            <th>Category</th>
+                                            <th>Sub Category Code</th>
+                                            <th>Sub Category Title</th>
+                                            <th>Sub Category Slug</th>
+                                            <th>Sub Category Status</th>
+                                            <th>Action</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for sub_category_data in sub_category %}
+                                            <tr>
+
+                                                <td><input type="checkbox"></td>
+                                                <td>{{ forloop.counter }}</td>
+                                                <td>
+                                                    ({{ sub_category_data.category.category_code }})-{{ sub_category_data.category.category_title }}</td>
+                                                <td>{{ sub_category_data.sub_category_code }}</td>
+                                                <td>{{ sub_category_data.sub_category_title }}</td>
+                                                <td>{{ sub_category_data.sub_category_slug }}</td>
+                                                <td>
+                                                    {% if  sub_category_data.sub_category_status %}
+                                                        <i class="fa fa-check-circle text-success"></i>
+                                                    {% else %}
+                                                        <i class="fa fa-times text-danger"></i>
+                                                    {% endif %}
+                                                </td>
+                                                <td></td>
+
+                                            </tr>
+                                        {% endfor %}
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <script src="{% static 'js/resources/sub_category.js' %}"></script>
+{% endblock main_content %}
