@@ -1,5 +1,5 @@
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.contrib import messages
 from django.urls import reverse
 
@@ -24,3 +24,22 @@ def sub_category(request):
         'sub_category': sub_category
     }
     return render(request, 'Backend/SubCategory/sub_category.html', context)
+
+
+def sub_category_delete(request, pk):
+    sub_category_data = get_object_or_404(SubCategory, pk=pk)
+    sub_category_data.delete()
+    messages.success(request, 'Sub Category Deleted Successfully')
+    return HttpResponseRedirect(reverse('sub_category'))
+
+
+def sub_category_status(request, pk):
+    sub_category_data = get_object_or_404(SubCategory, pk=pk)
+    if sub_category_data.sub_category_status:
+        sub_category_data.sub_category_status = 0
+        messages.warning(request, 'Successfully Status Updated Into Inactive')
+    else:
+        sub_category_data.sub_category_status = 1
+        messages.success(request, 'Successfully Status Updated Into Active')
+    sub_category_data.save()
+    return HttpResponseRedirect(reverse('sub_category'))
