@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, Http404
 from django.shortcuts import render, get_object_or_404
 from admin_backend.forms.category_form import CategoryForm
@@ -7,6 +8,7 @@ from admin_backend.serializers.category_serializer import CategorySerializer
 from .models import Category
 
 
+@login_required
 def category(request):
     form = CategoryForm()
     context = {

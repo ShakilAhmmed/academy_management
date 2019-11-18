@@ -15,7 +15,7 @@
                         </a></li>
                         <li><a href="javascript:void(0)"><i class="md md-settings"></i> Settings</a></li>
                         <li><a href="javascript:void(0)"><i class="md md-lock"></i> Lock screen</a></li>
-                        <li><a href="javascript:void(0)"><i class="md md-settings-power"></i> Logout</a></li>
+                        <li><a href="{% url 'admin_logout' %}"><i class="md md-settings-power"></i> Logout</a></li>
                     </ul>
                 </div>
 
@@ -32,7 +32,8 @@
 
                 <li>
 
-                    <a href="{% url 'category' %}" class="waves-effect"><i class="md md-event"></i><span> Category </span></a>
+                    <a href="{% url 'category' %}" class="waves-effect"><i
+                            class="md md-event"></i><span> Category </span></a>
                     <a href="{% url 'sub_category' %}" class="waves-effect"><i class="md md-event"></i><span> Sub Category </span></a>
                 </li>
 
