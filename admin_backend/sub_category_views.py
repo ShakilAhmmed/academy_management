@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.contrib import messages
@@ -7,6 +8,7 @@ from admin_backend.forms.sub_category_form import SubCategoryForm
 from admin_backend.models import SubCategory
 
 
+@login_required
 def sub_category(request):
     sub_category = SubCategory.objects.select_related().all()
     if request.method == "POST":
@@ -26,6 +28,7 @@ def sub_category(request):
     return render(request, 'Backend/SubCategory/sub_category.html', context)
 
 
+@login_required
 def sub_category_delete(request, pk):
     sub_category_data = get_object_or_404(SubCategory, pk=pk)
     sub_category_data.delete()
@@ -33,6 +36,7 @@ def sub_category_delete(request, pk):
     return HttpResponseRedirect(reverse('sub_category'))
 
 
+@login_required
 def sub_category_status(request, pk):
     sub_category_data = get_object_or_404(SubCategory, pk=pk)
     if sub_category_data.sub_category_status:

@@ -123,7 +123,9 @@ INTERNAL_IPS = [
     '127.0.0.1',
     # ...
 ]
-
+LOGIN_URL = '/'
+LOGIN_REDIRECT_URL = 'admin_home'
+LOGOUT_REDIRECT_URL = '/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 STATIC_URL = '/static/'
