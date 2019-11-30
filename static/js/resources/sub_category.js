@@ -7,10 +7,12 @@ new Vue({
         ConvertSlug: function (event) {
             var text = event.target.value;
             text = text.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '');
-            this.slug = text;
+            $("#id_sub_category_slug").val(text);
+            //this.slug = text;
         }
     },
 
     mounted() {
+
     }
 });

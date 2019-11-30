@@ -47,3 +47,19 @@ def sub_category_status(request, pk):
         messages.success(request, 'Successfully Status Updated Into Active')
     sub_category_data.save()
     return HttpResponseRedirect(reverse('sub_category'))
+
+
+@login_required
+def sub_category_edit(request, pk):
+    sub_category_data = get_object_or_404(SubCategory, pk=pk)
+    form = SubCategoryForm(instance=sub_category_data)
+    if request.method == "POST":
+        form = SubCategoryForm(request.POST, instance=sub_category_data)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'New Sub Category Added Successfully')
+            return HttpResponseRedirect(reverse('sub_category'))
+    context = {
+        'form': form
+    }
+    return render(request, 'Backend/SubCategory/edit_subcategory.html', context)

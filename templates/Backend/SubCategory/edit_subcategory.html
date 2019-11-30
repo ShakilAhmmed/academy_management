@@ -1,0 +1,54 @@
+{% extends 'index.html' %}
+{% load staticfiles %}
+{% block main_content %}
+    <div id="sub_category">
+        <form role="form" action="" method="post">
+            {% csrf_token %}
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h4 class="modal-title">Edit Sub Category</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="{{ form.category.id_for_label }}">{{ form.category.label|title }}</label>
+                                {{ form.category }}
+                                <small id="emailHelp"
+                                       class="form-text text-danger">{{ form.category.errors|title }}</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="{{ form.sub_category_code.id_for_label }}">{{ form.sub_category_code.label|title }}</label>
+                                {{ form.sub_category_code }}
+                                <small id="emailHelp"
+                                       class="form-text text-danger">{{ form.sub_category_code.errors|title }}</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="{{ form.sub_category_title.id_for_label }}">{{ form.sub_category_title.label|title }}</label>
+                                {{ form.sub_category_title }}
+                                <small id="emailHelp"
+                                       class="form-text text-danger">{{ form.sub_category_title.errors|title }}</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="{{ form.sub_category_slug.id_for_label }}">{{ form.sub_category_slug.label|title }}</label>
+                                {{ form.sub_category_slug }}
+                                <small id="emailHelp"
+                                       class="form-text text-danger">{{ form.sub_category_slug.errors|title }}</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="{{ form.sub_category_status.id_for_label }}">{{ form.sub_category_status.label|title }}</label>
+                                {{ form.sub_category_status }}
+                                <small id="emailHelp"
+                                       class="form-text text-danger">{{ form.sub_category_status.errors|title }}</small>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-info waves-effect waves-light">Save</button>
+                        </div>
+                    </div>
+                </div>
+        </form>
+
+    </div>
+    <script src="{% static 'js/resources/sub_category.js' %}"></script>
+{% endblock main_content %}
