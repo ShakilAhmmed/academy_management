@@ -15,6 +15,6 @@ class SubCategoryForm(forms.ModelForm):
             'sub_category_code': forms.TextInput(attrs={'class': 'form-control'}),
             'sub_category_title': forms.TextInput(attrs={'class': 'form-control', '@keyup': 'ConvertSlug($event)'}),
             'sub_category_slug': forms.TextInput(
-                attrs={'class': 'form-control', 'readonly': 'readonly', 'v-model': 'slug'}),
+                attrs={'class': 'form-control', 'readonly': 'readonly'}),
             'sub_category_status': forms.Select(choices=CHOICES, attrs={'class': 'form-control'}),
         }
