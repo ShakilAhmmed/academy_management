@@ -1,0 +1,66 @@
+{% extends 'index.html' %}
+{% load staticfiles %}
+{% block main_content %}
+    <div id="category">
+     <div class="modal-dialog">
+         <div class="modal-content">
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="{{ form.course_title.id_for_label }}">{{ form.course_title.label }}</label>
+                {{ form.course_title }}
+                <small id="emailHelp" class="form-text text-danger">{{ form.course_title.errors }}</small>
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.course_short_description.id_for_label }}">{{ form.course_short_description.label }}</label>
+                {{ form.course_short_description }}
+                <small id="emailHelp" class="form-text text-danger"> {{ form.course_short_description.errors }}</small>
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.course_description.id_for_label }}">{{ form.course_description.label }}</label>
+                {{ form.course_description }}
+                <small id="emailHelp" class="form-text text-danger"> {{ form.course_description.errors }}</small>
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.category.id_for_label }}">{{ form.category.label }}</label>
+                {{ form.category }}
+                <small id="emailHelp" class="form-text text-danger"> {{ form.category.errors }}</small>
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.sub_category.id_for_label }}">{{ form.sub_category.label }}</label>
+                {{ form.sub_category }}
+                <small id="emailHelp" class="form-text text-danger"> {{ form.sub_category.errors }}</small>
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.level.id_for_label }}">{{ form.level.label }}</label>
+                {{ form.level }}
+                <small id="emailHelp" class="form-text text-danger"> {{ form.level.errors }}</small>
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.course_language.id_for_label }}">{{ form.course_language.label }}</label>
+                {{ form.course_language }}
+                <small id="emailHelp" class="form-text text-danger"> {{ form.course_language.errors }}</small>
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.is_top.id_for_label }}">{{ form.is_top.label }}</label>
+                <br>
+                {{ form.is_top }}
+                <small id="emailHelp" class="form-text text-danger"> {{ form.is_top.errors }}</small>
+            </div>
+
+
+
+
+        </div>
+         </div>
+     </div>
+    </div>
+
+
+{% endblock main_content %}
